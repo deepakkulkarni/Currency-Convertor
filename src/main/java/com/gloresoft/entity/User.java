@@ -1,24 +1,22 @@
 package com.gloresoft.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
 
     @OneToOne(mappedBy = "user")
     private Registration registration;
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", unique = true)
     private String userName;
 
     @Column(name = "PASSWORD")
     private String password;
 
     public void addRegistration(Registration registration) {
+        this.setRegistration(registration);
         registration.setUser(this);
     }
 

@@ -28,13 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public void register(Register register) {
-        User user = createUser(register);
-
         Registration registration = createRegistration(register);
-        user.setRegistration(registration);
+        User user = createUser(register);
+        user.addRegistration(registration);
 
         registrationRepository.create(registration);
-        userRepository.create(user);
     }
 
     private Registration createRegistration(Register register) {
