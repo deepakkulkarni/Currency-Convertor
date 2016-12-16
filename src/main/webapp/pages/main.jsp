@@ -19,7 +19,7 @@
     });
   </script>
   <div class="user-info">
-    <span>Welcome, Deepak Kulkarni <br> <a href="#">Logout</a></span>
+    <span>Welcome, Deepak Kulkarni <br> <a href="logout">Logout</a></span>
   </div>
     <div id="convert" class="main-page">
         <div id="inner">
