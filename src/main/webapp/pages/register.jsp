@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="register">
-        <form action="#" method="post">
+        <form action="register" method="post">
             <input type="text" placeholder="Name" name="name" required>
             <input type="text" placeholder="Username" name="username" required>
             <input type="password" placeholder="Password" name="password" required>
@@ -38,7 +38,7 @@
     });
 
     $("#back").click(function () {
-        window.location.href = '';
+        window.location.href = '/';
     });
     </script>
 </body>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Main Page</title>
@@ -7,36 +8,24 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-<script>
-    $(function() {
-        $("#datepicker").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            maxDate: 0,
-            dateFormat: 'dd-M-yy'
-          });
-    });
-  </script>
   <div class="user-info">
-    <span>Welcome, Deepak Kulkarni <br> <a href="logout">Logout</a></span>
+    <span>Welcome, Deepak Kulkarni <br> <a href="/currency-convertor/invalidate">Logout</a></span>
   </div>
     <div id="convert" class="main-page">
         <div id="inner">
-            <form action="#" method="post">
-                <input type="text" id="datepicker" placeholder="Date of exchange" style="font-weight:bold; text-align=center">
+            <form action="convert" method="post">
+                <input type="text" name="exchangeDate" id="datepicker" placeholder="Date of exchange" required>
                 <select name="fromCurrency" required>
-                  <option value="value1">EUR</option>
-                  <option value="value2" selected>USD</option>
-                  <option value="value3">INR</option>
+                  <c:forEach var="currency" items="${currencyTypes}">
+                      <option value="${currency}" ${currency == 'USD' ? 'selected' : ''}>${currency}</option>
+                  </c:forEach>
                 </select>
                 <select name="toCurrency" required>
-                  <option value="value1" selected>EUR</option>
-                  <option value="value2">USD</option>
-                  <option value="value3">INR</option>
+                  <c:forEach var="currency" items="${currencyTypes}">
+                    <option value="${currency}" ${currency == 'GBP' ? 'selected' : ''}>${currency}</option>
+                  </c:forEach>
                  </select>
                 <input type="submit" value="Get Exchange Rate">
-                <span id="result">50.50</span>
             </form>
          </div>
     </div>
@@ -48,14 +37,27 @@
                 <th>Rate</th>
                 <th>Date</th>
             </tr>
-            <tr style="color: #205081;">
-                <td height="30px">USD</td>
-                <td>INR</td>
-                <td>66.67</td>
-                <td>10-DEC-2016</td>
-            </tr>
+            <c:forEach var="conversion" items="${conversions}">
+                <tr style="color: #205081;">
+                    <td height="30px">${conversion.fromCurrency}</td>
+                    <td>${conversion.toCurrency}</td>
+                    <td>${conversion.rate}</td>
+                    <td>${conversion.exchangeDate}</td>
+                </tr>
+            </c:forEach>
 
          </table>
     </div>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                maxDate: 0,
+                dateFormat: 'dd-M-yy'
+              });
+        });
+      </script>
 </body>
 </html>

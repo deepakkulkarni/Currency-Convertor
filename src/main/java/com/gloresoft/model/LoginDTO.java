@@ -1,6 +1,6 @@
-package com.gloresoft.bean;
+package com.gloresoft.model;
 
-public class Login {
+public class LoginDTO {
 
     private String username;
     private String password;

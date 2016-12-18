@@ -1,7 +1,7 @@
 package com.gloresoft.service;
 
-import com.gloresoft.bean.Login;
-import com.gloresoft.bean.Register;
+import com.gloresoft.model.LoginDTO;
+import com.gloresoft.model.RegisterDTO;
 import com.gloresoft.entity.Registration;
 import com.gloresoft.entity.User;
 import com.gloresoft.repository.RegistrationRepository;
@@ -22,35 +22,36 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RegistrationRepository registrationRepository;
 
-    public boolean authenticate(Login login) {
-        String securedPassword = DigestUtils.sha512Hex(login.getPassword().getBytes());
-        return userRepository.authenticate(login.getUsername(), securedPassword);
+    public boolean authenticate(LoginDTO loginDTO) {
+        String securedPassword = DigestUtils.sha512Hex(loginDTO.getPassword().getBytes());
+        return userRepository.authenticate(loginDTO.getUsername(), securedPassword);
     }
 
-    public void register(Register register) {
-        Registration registration = createRegistration(register);
-        User user = createUser(register);
+    public void register(RegisterDTO registerDTO) {
+        Registration registration = createRegistration(registerDTO);
+
+        User user = createUser(registerDTO);
         user.addRegistration(registration);
 
         registrationRepository.create(registration);
     }
 
-    private Registration createRegistration(Register register) {
+    private Registration createRegistration(RegisterDTO registerDTO) {
         Registration registration = new Registration();
-        registration.setName(register.getName());
-        registration.setEmail(register.getEmail());
-        registration.setCity(register.getCity());
-        registration.setCountry(register.getCountry());
-        registration.setDob(register.getDob());
-        registration.setPinCode(register.getPin());
-        registration.setStreetName(register.getAddress());
+        registration.setName(registerDTO.getName());
+        registration.setEmail(registerDTO.getEmail());
+        registration.setCity(registerDTO.getCity());
+        registration.setCountry(registerDTO.getCountry());
+        registration.setDob(registerDTO.getDob());
+        registration.setPinCode(registerDTO.getPin());
+        registration.setStreetName(registerDTO.getAddress());
         return registration;
     }
 
-    private User createUser(Register register) {
+    private User createUser(RegisterDTO registerDTO) {
         User user = new User();
-        user.setUserName(register.getUsername());
-        user.setPassword(DigestUtils.sha512Hex(register.getPassword().getBytes()));
+        user.setUserName(registerDTO.getUsername());
+        user.setPassword(DigestUtils.sha512Hex(registerDTO.getPassword().getBytes()));
         return user;
     }
 

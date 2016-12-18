@@ -6,6 +6,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.gloresoft.entity.User</class>
         <class>com.gloresoft.entity.Registration</class>
+        <class>com.gloresoft.entity.Conversion</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>

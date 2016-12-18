@@ -1,8 +1,8 @@
-package com.gloresoft.bean;
+package com.gloresoft.model;
 
 import java.util.Date;
 
-public class Register {
+public class RegisterDTO {
 
     private String name;
     private String username;

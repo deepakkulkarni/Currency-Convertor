@@ -1,12 +1,11 @@
 package com.gloresoft.service;
 
-import com.gloresoft.bean.Login;
-import com.gloresoft.bean.Register;
-import org.springframework.stereotype.Service;
+import com.gloresoft.model.LoginDTO;
+import com.gloresoft.model.RegisterDTO;
 
 public interface UserService {
 
-    boolean authenticate(Login login);
+    boolean authenticate(LoginDTO loginDTO);
 
-    void register(Register register);
+    void register(RegisterDTO registerDTO);
 }
