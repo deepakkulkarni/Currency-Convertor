@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Query;
 
 @Repository
-public class UserRepositoryImpl extends AbstractBaseRepository<User> implements UserRepository{
+public class UserRepositoryImpl extends AbstractBaseRepository<User> implements UserRepository {
 
     public UserRepositoryImpl() {
         super(User.class);
@@ -15,9 +15,17 @@ public class UserRepositoryImpl extends AbstractBaseRepository<User> implements 
     @Override
     public boolean authenticate(String userName, String password) {
         Query query = entityManager.createQuery("SELECT case when (count(u) = 1) then true else false end FROM User u WHERE u.userName = :username AND u.password = :password");
-        query.setParameter("username",userName);
-        query.setParameter("password",password);
-        boolean isAuthenticated = (Boolean) query .getSingleResult();
+        query.setParameter("username", userName);
+        query.setParameter("password", password);
+        boolean isAuthenticated = (Boolean) query.getSingleResult();
         return isAuthenticated;
+    }
+
+    @Override
+    public User findByName(String userName) {
+        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName = :username");
+        query.setParameter("username", userName);
+        User user = (User) query.getSingleResult();
+        return user;
     }
 }

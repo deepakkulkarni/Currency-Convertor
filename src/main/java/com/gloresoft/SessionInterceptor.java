@@ -1,5 +1,6 @@
 package com.gloresoft;
 
+import com.gloresoft.entity.User;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.Cookie;
@@ -24,7 +25,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         if (exclusionList.contains(path))
             return true;
 
-        String user = (String) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             response.sendRedirect("redirect:/");
             return false;

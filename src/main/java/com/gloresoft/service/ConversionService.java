@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ConversionService {
 
-    List<Conversion> getConversions();
+    List<Conversion> getConversions(Long Id);
 
-    void convert(ConversionDTO conversionDTO);
+    void convert(ConversionDTO conversionDTO, Long Id);
 
 }

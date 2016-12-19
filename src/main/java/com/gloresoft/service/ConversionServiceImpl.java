@@ -1,9 +1,11 @@
 package com.gloresoft.service;
 
 import com.gloresoft.entity.Conversion;
+import com.gloresoft.entity.User;
 import com.gloresoft.model.ConversionDTO;
 import com.gloresoft.repository.ConversionRepository;
 import com.gloresoft.repository.CurrencyRepository;
+import com.gloresoft.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +21,25 @@ public class ConversionServiceImpl implements ConversionService {
     @Autowired
     private CurrencyRepository currencyRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public List<Conversion> getConversions() {
-        List<Conversion> conversions = conversionRepository.findAll();
+    public List<Conversion> getConversions(Long Id) {
+        List<Conversion> conversions = conversionRepository.findAllByUserId(Id);
         return conversions;
     }
 
     @Override
-    public void convert(ConversionDTO conversionDTO) {
+    public void convert(ConversionDTO conversionDTO, Long Id) {
+        User user =  userRepository.findById(Id);
+
         Conversion conversion = createConversion(conversionDTO);
-
         BigDecimal rate = currencyRepository.getCurrencyConversion(conversionDTO);
-
         conversion.setRate(rate);
-        conversionRepository.create(conversion);
+        conversion.setUser(user);
+
+        conversionRepository.merge(conversion);
     }
 
     private Conversion createConversion(ConversionDTO conversionDTO) {
@@ -40,7 +47,6 @@ public class ConversionServiceImpl implements ConversionService {
         conversion.setFromCurrency(conversionDTO.getFromCurrency());
         conversion.setToCurrency(conversionDTO.getToCurrency());
         conversion.setExchangeDate(conversionDTO.getExchangeDate());
-        //conversion.setRate(conversionDTO.getRate());
         return conversion;
     }
 }

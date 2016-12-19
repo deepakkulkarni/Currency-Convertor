@@ -61,4 +61,8 @@ public class UserServiceImpl implements UserService {
         sr.nextBytes(salt);
         return salt;
     }
+
+    public User findByName(String username) {
+        return userRepository.findByName(username);
+    }
 }

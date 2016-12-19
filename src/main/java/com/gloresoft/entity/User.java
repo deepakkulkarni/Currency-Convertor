@@ -1,6 +1,7 @@
 package com.gloresoft.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
@@ -14,6 +15,22 @@ public class User extends AbstractEntity {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @OneToMany(mappedBy="user")
+    private Set<Conversion> conversions;
+
+    public void addConversion(Conversion conversion) {
+        conversion.setUser(this);
+        conversions.add(conversion);
+    }
+
+    public Set<Conversion> getConversions() {
+        return conversions;
+    }
+
+    public void setConversions(Set<Conversion> conversions) {
+        this.conversions = conversions;
+    }
 
     public void addRegistration(Registration registration) {
         this.setRegistration(registration);

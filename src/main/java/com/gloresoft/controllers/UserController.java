@@ -1,5 +1,6 @@
 package com.gloresoft.controllers;
 
+import com.gloresoft.entity.User;
 import com.gloresoft.model.LoginDTO;
 import com.gloresoft.model.RegisterDTO;
 import com.gloresoft.service.CurrencyService;
@@ -43,17 +44,12 @@ public class UserController {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ModelAndView authenticate(HttpServletRequest request, @ModelAttribute LoginDTO loginDTO) {
-        ModelAndView mav = new ModelAndView();
-
         if (userService.authenticate(loginDTO)) {
-            request.getSession().setAttribute("user", loginDTO.getUsername());
-            mav.addObject("currencyTypes", currencyService.getTypes());
-            mav.setViewName("main");
-            return mav;
+            User user = userService.findByName(loginDTO.getUsername());
+            request.getSession().setAttribute("user", user);
+            return new ModelAndView("redirect:/list");
         }
-
-        mav.setViewName("login");
-        return mav;
+        return new ModelAndView("login");
     }
 
     @RequestMapping(value = "/invalidate", method = RequestMethod.GET)

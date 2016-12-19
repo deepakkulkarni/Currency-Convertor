@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CurrencyRepositoryImpl implements CurrencyRepository{
+public class CurrencyRepositoryImpl implements CurrencyRepository {
 
     private final static String currency_API_BASE_URL = "http://api.fixer.io/";
 
@@ -24,6 +24,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository{
         RestTemplate restTemplate = new RestTemplate();
         CurrencyDTO currencyDTO = restTemplate.getForObject(currency_API_URL, CurrencyDTO.class);
 
+        currencyType.add(currencyDTO.getBaseCurrency());
         currencyDTO.getRates().keySet().forEach(e -> currencyType.add(e));
         return currencyType;
     }
@@ -34,7 +35,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository{
         String fromCurrency = conversionDTO.getFromCurrency();
         String toCurrency = conversionDTO.getToCurrency();
 
-        String currency_API_URL  = currency_API_BASE_URL + date + "?base="+ fromCurrency + "&symbols=" + toCurrency;
+        String currency_API_URL = currency_API_BASE_URL + date + "?base=" + fromCurrency + "&symbols=" + toCurrency;
 
         RestTemplate restTemplate = new RestTemplate();
         CurrencyDTO currencyDTO = restTemplate.getForObject(currency_API_URL, CurrencyDTO.class);

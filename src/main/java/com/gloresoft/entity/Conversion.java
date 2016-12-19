@@ -1,14 +1,12 @@
 package com.gloresoft.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name = "CONVERSION")
-public class Conversion extends AbstractEntity{
+public class Conversion extends AbstractEntity {
 
     @Column(name = "FROM_CURRENCY")
     private String fromCurrency;
@@ -21,6 +19,22 @@ public class Conversion extends AbstractEntity{
 
     @Column(name = "EXCHANGE_DATE")
     private Date exchangeDate;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    public void addUser(User user) {
+        this.setUser(user);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getFromCurrency() {
         return fromCurrency;

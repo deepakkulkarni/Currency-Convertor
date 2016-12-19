@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="user-info">
-    <span>Welcome, Deepak Kulkarni <br> <a href="/currency-convertor/invalidate">Logout</a></span>
+    <span>Welcome, ${name} <br> <a href="/currency-convertor/invalidate">Logout</a></span>
   </div>
     <div id="convert" class="main-page">
         <div id="inner">
@@ -17,12 +17,12 @@
                 <input type="text" name="exchangeDate" id="datepicker" placeholder="Date of exchange" required>
                 <select name="fromCurrency" required>
                   <c:forEach var="currency" items="${currencyTypes}">
-                      <option value="${currency}" ${currency == 'USD' ? 'selected' : ''}>${currency}</option>
+                      <option value="${currency}" ${currency == 'EUR' ? 'selected' : ''}>${currency}</option>
                   </c:forEach>
                 </select>
                 <select name="toCurrency" required>
                   <c:forEach var="currency" items="${currencyTypes}">
-                    <option value="${currency}" ${currency == 'GBP' ? 'selected' : ''}>${currency}</option>
+                    <option value="${currency}" ${currency == 'USD' ? 'selected' : ''}>${currency}</option>
                   </c:forEach>
                  </select>
                 <input type="submit" value="Get Exchange Rate">
