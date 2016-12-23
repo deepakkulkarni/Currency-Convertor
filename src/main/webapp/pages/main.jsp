@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
     <title>Main Page</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/jquery-ui.js"></script>
 </head>
 <body>
   <div class="user-info">
@@ -38,14 +39,13 @@
                 <th>Date</th>
             </tr>
             <c:forEach var="conversion" items="${conversions}">
-                <tr style="color: #205081;">
-                    <td height="30px">${conversion.fromCurrency}</td>
-                    <td>${conversion.toCurrency}</td>
-                    <td>${conversion.rate}</td>
-                    <td>${conversion.exchangeDate}</td>
+                <tr class="row">
+                    <td class="column" height="30px">${conversion.fromCurrency}</td>
+                    <td class="column">${conversion.toCurrency}</td>
+                    <td class="column">${conversion.rate}</td>
+                    <td class="column"><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
                 </tr>
             </c:forEach>
-
          </table>
     </div>
     <script>
@@ -53,7 +53,7 @@
             $("#datepicker").datepicker({
                 changeMonth: true,
                 changeYear: true,
-                yearRange: "-100:+0",
+                yearRange: "-10:+0",
                 maxDate: 0,
                 dateFormat: 'dd-M-yy'
               });

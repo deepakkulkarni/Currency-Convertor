@@ -3,7 +3,7 @@
     <groupId>com.company</groupId>
     <artifactId>currency-convertor</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>currency-convertor</name>
     <description>Currency Convertor</description>
 
@@ -23,7 +23,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>

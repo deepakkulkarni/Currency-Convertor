@@ -39,5 +39,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         exclusionList.add("/invalidate");
         exclusionList.add("/register");
         exclusionList.add("/authenticate");
+        exclusionList.add("/check-username");
+        exclusionList.add("/error");
     }
 }

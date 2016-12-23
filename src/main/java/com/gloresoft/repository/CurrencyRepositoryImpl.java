@@ -34,6 +34,8 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
         String date = new SimpleDateFormat("yyyy-MM-dd").format(conversionDTO.getExchangeDate());
         String fromCurrency = conversionDTO.getFromCurrency();
         String toCurrency = conversionDTO.getToCurrency();
+        if (fromCurrency.equalsIgnoreCase(toCurrency))
+            return new BigDecimal(1);
 
         String currency_API_URL = currency_API_BASE_URL + date + "?base=" + fromCurrency + "&symbols=" + toCurrency;
 

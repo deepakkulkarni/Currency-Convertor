@@ -23,9 +23,20 @@ public class UserServiceImpl implements UserService {
     private RegistrationRepository registrationRepository;
 
     public boolean authenticate(LoginDTO loginDTO) {
-        String securedPassword = DigestUtils.sha512Hex(loginDTO.getPassword().getBytes());
+        String passwordSalt = userRepository.getPasswordSalt(loginDTO.getUsername());
+        String securedPassword = DigestUtils.sha512Hex((loginDTO.getPassword() + passwordSalt).getBytes());
         return userRepository.authenticate(loginDTO.getUsername(), securedPassword);
     }
+
+    public User findByName(String username) {
+        return userRepository.findByName(username);
+    }
+
+    @Override
+    public boolean isUserNameExists(String userName) {
+        return userRepository.isUserNameExists(userName);
+    }
+
 
     public void register(RegisterDTO registerDTO) {
         Registration registration = createRegistration(registerDTO);
@@ -49,20 +60,24 @@ public class UserServiceImpl implements UserService {
     }
 
     private User createUser(RegisterDTO registerDTO) {
+        String salt = getSalt();
+
         User user = new User();
         user.setUserName(registerDTO.getUsername());
-        user.setPassword(DigestUtils.sha512Hex(registerDTO.getPassword().getBytes()));
+        user.setPassword(DigestUtils.sha512Hex((registerDTO.getPassword() + salt).getBytes()));
+        user.setPasswordSalt(salt);
         return user;
     }
 
-    private static byte[] getSalt() throws NoSuchAlgorithmException {
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+    private String getSalt() {
+        SecureRandom sr = null;
+        try {
+            sr = SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         byte[] salt = new byte[16];
         sr.nextBytes(salt);
-        return salt;
-    }
-
-    public User findByName(String username) {
-        return userRepository.findByName(username);
+        return new String(salt);
     }
 }

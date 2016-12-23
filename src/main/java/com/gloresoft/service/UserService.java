@@ -11,4 +11,6 @@ public interface UserService {
     void register(RegisterDTO registerDTO);
 
     User findByName(String username);
+
+    boolean isUserNameExists(String userName);
 }

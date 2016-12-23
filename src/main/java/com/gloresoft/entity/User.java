@@ -16,6 +16,17 @@ public class User extends AbstractEntity {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "PASSWORD_SALT")
+    private String passwordSalt;
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
     @OneToMany(mappedBy="user")
     private Set<Conversion> conversions;
 

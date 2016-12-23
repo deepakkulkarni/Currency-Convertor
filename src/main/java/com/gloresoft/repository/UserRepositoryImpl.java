@@ -3,7 +3,9 @@ package com.gloresoft.repository;
 import com.gloresoft.entity.User;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.Collections;
 
 @Repository
 public class UserRepositoryImpl extends AbstractBaseRepository<User> implements UserRepository {
@@ -17,8 +19,14 @@ public class UserRepositoryImpl extends AbstractBaseRepository<User> implements 
         Query query = entityManager.createQuery("SELECT case when (count(u) = 1) then true else false end FROM User u WHERE u.userName = :username AND u.password = :password");
         query.setParameter("username", userName);
         query.setParameter("password", password);
-        boolean isAuthenticated = (Boolean) query.getSingleResult();
-        return isAuthenticated;
+        return (Boolean) query.getSingleResult();
+    }
+
+    @Override
+    public boolean isUserNameExists(String userName) {
+        Query query = entityManager.createQuery("SELECT case when (count(u) = 0) then false else true end FROM User u WHERE u.userName = :username");
+        query.setParameter("username", userName);
+        return (Boolean) query.getSingleResult();
     }
 
     @Override
@@ -27,5 +35,18 @@ public class UserRepositoryImpl extends AbstractBaseRepository<User> implements 
         query.setParameter("username", userName);
         User user = (User) query.getSingleResult();
         return user;
+    }
+
+    @Override
+    public String getPasswordSalt(String userName) {
+        Query query = entityManager.createQuery("SELECT u.passwordSalt FROM User u WHERE u.userName = :username");
+        query.setParameter("username", userName);
+        String passwordSalt = "";
+        try {
+            passwordSalt = (String) query.getSingleResult();
+        } catch (NoResultException e) {
+            return passwordSalt;
+        }
+        return passwordSalt;
     }
 }

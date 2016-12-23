@@ -17,7 +17,8 @@ public class ConversionRepositoryImpl extends AbstractBaseRepository<Conversion>
 
     @Override
     public List<Conversion> findAllByUserId(Long Id) {
-        final Query query = entityManager.createQuery("SELECT u.conversions FROM User u where u.id = :Id");
+        final Query query = entityManager.createQuery("SELECT u.conversions FROM User u where u.id = :Id ORDER BY id DESC");
+        query.setMaxResults(10);
         query.setParameter("Id", Id);
         try {
             return query.getResultList();
@@ -25,6 +26,4 @@ public class ConversionRepositoryImpl extends AbstractBaseRepository<Conversion>
             return Collections.emptyList();
         }
     }
-
-
 }
