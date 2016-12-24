@@ -18,7 +18,7 @@
             <input type="password" id="password" placeholder="Password" name="password">
             <input type="password" placeholder="Confirm Password" name="confirmPassword">
             <input type="text" placeholder="Email" name="email">
-            <input type="text" placeholder="Date of birth" name="dob" id="datepicker" readonly required>
+            <input type="text" placeholder="Date of birth" name="dob" id="birthdate" readonly required>
             <input type="text" placeholder="Building/Street" name="address">
             <input type="text" placeholder="Pin" name="pin">
             <input type="text" placeholder="City" name="city">
@@ -34,13 +34,15 @@
     </div>
     <script>
     $(function() {
-        $("#datepicker").datepicker({
+        var currentDate = new Date();
+        $("#birthdate").datepicker({
             changeMonth: true,
             changeYear: true,
             yearRange: "-100:+0",
             maxDate: 0,
             dateFormat: 'dd-M-yy'
           });
+          $("#birthdate").datepicker("setDate", currentDate);
     });
 
     $("#back").click(function () {

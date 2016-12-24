@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/jquery-ui.js"></script>
+    <script src="js/validation/main-validation.js"></script>
 </head>
 <body>
   <div class="user-info">
@@ -14,8 +15,8 @@
   </div>
     <div id="convert" class="main-page">
         <div id="inner">
-            <form action="convert" method="post">
-                <input type="text" name="exchangeDate" id="datepicker" placeholder="Date of exchange" required readonly>
+            <form action="convert" method="post" id="convertForm">
+                <input type="text" name="exchangeDate" id="conversionDate" placeholder="Date of exchange" required readonly>
                 <select name="fromCurrency" required>
                   <c:forEach var="currency" items="${currencyTypes}">
                       <option value="${currency}" ${currency == 'EUR' ? 'selected' : ''}>${currency}</option>
@@ -50,13 +51,15 @@
     </div>
     <script>
         $(function() {
-            $("#datepicker").datepicker({
+            var currentDate = new Date();
+            $("#conversionDate").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-10:+0",
                 maxDate: 0,
                 dateFormat: 'dd-M-yy'
               });
+              $("#conversionDate").datepicker("setDate", currentDate);
         });
       </script>
 </body>

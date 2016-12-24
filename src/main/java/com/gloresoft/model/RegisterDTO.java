@@ -1,8 +1,9 @@
 package com.gloresoft.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RegisterDTO {
+public class RegisterDTO implements Serializable {
 
     private String name;
     private String username;

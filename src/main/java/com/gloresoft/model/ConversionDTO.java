@@ -1,8 +1,9 @@
 package com.gloresoft.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConversionDTO {
+public class ConversionDTO implements Serializable {
 
     private String fromCurrency;
     private String toCurrency;

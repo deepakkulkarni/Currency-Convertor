@@ -18,6 +18,7 @@ $(document).ready(function() {
            required: true,
            email: true
         },
+        dob : "required",
         address: "required",
         pin: "required",
         city: "required",
@@ -42,6 +43,7 @@ $(document).ready(function() {
             email: "Please enter a valid email address"
          },
         address: "Address field cannot be blank!",
+        dob: "Date of Birth field cannot be blank!",
         pin: "Pin field cannot be blank!",
         city: "City field cannot be blank!",
         country: "Please select your country"
