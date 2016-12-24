@@ -15,7 +15,7 @@
     <div id="convert" class="main-page">
         <div id="inner">
             <form action="convert" method="post">
-                <input type="text" name="exchangeDate" id="datepicker" placeholder="Date of exchange" required>
+                <input type="text" name="exchangeDate" id="datepicker" placeholder="Date of exchange" required readonly>
                 <select name="fromCurrency" required>
                   <c:forEach var="currency" items="${currencyTypes}">
                       <option value="${currency}" ${currency == 'EUR' ? 'selected' : ''}>${currency}</option>

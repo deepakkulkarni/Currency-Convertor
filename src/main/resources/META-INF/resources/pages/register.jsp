@@ -18,11 +18,11 @@
             <input type="password" id="password" placeholder="Password" name="password">
             <input type="password" placeholder="Confirm Password" name="confirmPassword">
             <input type="text" placeholder="Email" name="email">
-            <input type="text" placeholder="Date of birth" name="dob" id="datepicker" required>
+            <input type="text" placeholder="Date of birth" name="dob" id="datepicker" readonly required>
             <input type="text" placeholder="Building/Street" name="address">
             <input type="text" placeholder="Pin" name="pin">
             <input type="text" placeholder="City" name="city">
-            <input type="text" placeholder="Country" name="country" list="allCountries">
+            <input type="text" placeholder="Country" name="country" id="country" list="allCountries">
             <datalist id="allCountries">
                   <c:forEach var="country" items="${countries}">
                       <option value="${country}">${country}</option>
@@ -56,6 +56,16 @@
                 $('#username').focus();
              }
         });
+    });
+
+    $('#registrationForm').submit(function(){
+            var selectedCountry = $('#country').val();
+            var obj = $("#allCountries").find("option[value='"+selectedCountry+"']")
+             if(obj !=null && obj.length<=0){
+                 alert("Please enter a valid country.");
+                 $('#country').val("");
+                 $('#country').focus();
+             }
     });
 
     </script>

@@ -37,7 +37,10 @@ $(document).ready(function() {
             minlength: "Password must have at least 6 characters",
             equalTo: "Please enter the same password as above"
         },
-        email: "Email field cannot be blank!",
+        email: {
+            required: "Email field cannot be blank!",
+            email: "Please enter a valid email address"
+         },
         address: "Address field cannot be blank!",
         pin: "Pin field cannot be blank!",
         city: "City field cannot be blank!",
