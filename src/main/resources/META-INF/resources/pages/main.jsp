@@ -8,6 +8,7 @@
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/validation/main-validation.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
 </head>
 <body>
   <div class="user-info">

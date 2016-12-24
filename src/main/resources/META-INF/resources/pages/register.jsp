@@ -7,7 +7,7 @@
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/validation/registration-validation.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
 </head>
 <body>
     <div class="register">
