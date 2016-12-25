@@ -34,7 +34,6 @@
     </div>
     <script>
     $(function() {
-        var currentDate = new Date();
         $("#birthdate").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -42,7 +41,6 @@
             maxDate: 0,
             dateFormat: 'dd-M-yy'
           });
-          $("#birthdate").datepicker("setDate", currentDate);
     });
 
     $("#back").click(function () {

@@ -1,19 +1,19 @@
 package com.gloresoft.service;
 
-import com.gloresoft.repository.LocationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    @Autowired
-    private LocationRepository locationRepository;
+    @Value("#{'${allCountries}'.split(',')}")
+    List<String> countries = new ArrayList<>();
 
     @Override
     public List<String> getAllCountries() {
-        return locationRepository.getAllCountries();
+        return countries;
     }
 }

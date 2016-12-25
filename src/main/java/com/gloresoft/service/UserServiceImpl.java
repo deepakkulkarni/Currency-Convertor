@@ -22,12 +22,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RegistrationRepository registrationRepository;
 
+    @Override
     public boolean authenticate(LoginDTO loginDTO) {
         String passwordSalt = userRepository.getPasswordSalt(loginDTO.getUsername());
         String securedPassword = DigestUtils.sha512Hex((loginDTO.getPassword() + passwordSalt).getBytes());
         return userRepository.authenticate(loginDTO.getUsername(), securedPassword);
     }
 
+    @Override
     public User findByName(String username) {
         return userRepository.findByName(username);
     }
@@ -37,7 +39,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.isUserNameExists(userName);
     }
 
-
+    @Override
     public void register(RegisterDTO registerDTO) {
         Registration registration = createRegistration(registerDTO);
 
