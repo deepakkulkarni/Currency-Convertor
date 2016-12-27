@@ -91,7 +91,6 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/authenticate").contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk()).andExpect(model().attributeExists("authenticationError")).andExpect(view().name("login"));
-
     }
 
     @Test
@@ -116,12 +115,12 @@ public class UserControllerTest {
 
     }
 
-    private LoginDTO createLoginDTO() {
+    /*private LoginDTO createLoginDTO() {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUsername("john");
         loginDTO.setPassword("123456");
         return loginDTO;
-    }
+    }*/
 
     @Test
     public void testRegisterPOST() throws Exception {

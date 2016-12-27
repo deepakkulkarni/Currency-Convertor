@@ -1,7 +1,10 @@
 package com.gloresoft.service;
 
+import com.gloresoft.entity.Registration;
 import com.gloresoft.entity.User;
 import com.gloresoft.model.LoginDTO;
+import com.gloresoft.model.RegisterDTO;
+import com.gloresoft.repository.RegistrationRepository;
 import com.gloresoft.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +20,9 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private RegistrationRepository registrationRepository;
 
     @InjectMocks
     private UserServiceImpl userService;
@@ -55,5 +61,26 @@ public class UserServiceTest {
         verify(userRepository, times(1)).authenticate(anyString(), anyString());
     }
 
+    @Test
+    public void testRegister() {
 
+        RegisterDTO registerDTO = createRegisterDTO();
+
+        userService.register(registerDTO);
+
+        verify(registrationRepository, times(1)).create(any(Registration.class));
+    }
+
+    private RegisterDTO createRegisterDTO() {
+        RegisterDTO registerDTO = new RegisterDTO();
+        registerDTO.setName("John Smith");
+        registerDTO.setUsername("john");
+        registerDTO.setPassword("123456");
+        registerDTO.setEmail("john.smith@company.com");
+        registerDTO.setAddress("Ocean Avenue Apt 6B Brooklyn");
+        registerDTO.setPin("11211");
+        registerDTO.setCity("New York");
+        registerDTO.setCountry("USA");
+        return registerDTO;
+    }
 }

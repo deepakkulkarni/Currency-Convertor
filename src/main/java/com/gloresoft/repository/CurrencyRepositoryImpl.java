@@ -4,6 +4,7 @@ package com.gloresoft.repository;
 import com.gloresoft.model.ConversionDTO;
 import com.gloresoft.model.CurrencyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,6 +33,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
         return currencyType;
     }
 
+    @Cacheable(value="conversions")
     public BigDecimal getCurrencyConversion(ConversionDTO conversionDTO) {
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(conversionDTO.getExchangeDate());

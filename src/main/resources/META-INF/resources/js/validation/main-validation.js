@@ -6,4 +6,4 @@ $(document).ready(function() {
     messages: {
         exchangeDate: "Exchange Date field cannot be blank!"
         }
- }});
+ )}});

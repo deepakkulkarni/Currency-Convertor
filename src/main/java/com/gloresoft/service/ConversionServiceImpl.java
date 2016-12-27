@@ -26,16 +26,16 @@ public class ConversionServiceImpl implements ConversionService {
 
     @Override
     public List<Conversion> getConversions(Long Id) {
-        List<Conversion> conversions = conversionRepository.findAllByUserId(Id);
-        return conversions;
+        return conversionRepository.findAllByUserId(Id);
     }
 
     @Override
     public void convert(ConversionDTO conversionDTO, Long Id) {
         User user =  userRepository.findById(Id);
 
-        Conversion conversion = createConversion(conversionDTO);
         BigDecimal rate = currencyRepository.getCurrencyConversion(conversionDTO);
+
+        Conversion conversion = createConversion(conversionDTO);
         conversion.setRate(rate);
         conversion.setUser(user);
 

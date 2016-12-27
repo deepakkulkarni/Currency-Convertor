@@ -5,6 +5,7 @@ import com.gloresoft.model.ConversionDTO;
 import com.gloresoft.service.ConversionService;
 import com.gloresoft.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ public class ConversionController {
     @Autowired
     public CurrencyService currencyService;
 
+
+    @Cacheable(value="conversions")
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
     public ModelAndView convert(HttpServletRequest request, @ModelAttribute ConversionDTO conversionDTO) {
         User user = (User)request.getSession().getAttribute("user");

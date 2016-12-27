@@ -32,24 +32,28 @@
             </form>
          </div>
     </div>
-    <div id="history" class="history">
-         <table>
-            <tr>
-                <th height="50px" width="30%">From Currency</th>
-                <th>To Currency</th>
-                <th>Rate</th>
-                <th>Date</th>
-            </tr>
-            <c:forEach var="conversion" items="${conversions}">
-                <tr class="row">
-                    <td class="column" height="30px">${conversion.fromCurrency}</td>
-                    <td class="column">${conversion.toCurrency}</td>
-                    <td class="column">${conversion.rate}</td>
-                    <td class="column"><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
+
+   <c:if test="${!empty(conversions)}">
+        <div id="history" class="history">
+             <table>
+                <tr>
+                    <th height="50px" width="30%">From Currency</th>
+                    <th>To Currency</th>
+                    <th>Rate</th>
+                    <th>Date</th>
                 </tr>
-            </c:forEach>
-         </table>
-    </div>
+                <c:forEach var="conversion" items="${conversions}">
+                    <tr class="row">
+                        <td class="column" height="30px">${conversion.fromCurrency}</td>
+                        <td class="column">${conversion.toCurrency}</td>
+                        <td class="column">${conversion.rate}</td>
+                        <td class="column"><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
+                    </tr>
+                </c:forEach>
+             </table>
+        </div>
+    </c:if>
+
     <script>
         $(function() {
             var currentDate = new Date();
