@@ -24,10 +24,9 @@ public class ConversionController {
     public CurrencyService currencyService;
 
 
-    @Cacheable(value="conversions")
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
     public ModelAndView convert(HttpServletRequest request, @ModelAttribute ConversionDTO conversionDTO) {
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         conversionService.convert(conversionDTO, user.getId());
         return new ModelAndView("redirect:/list");
     }

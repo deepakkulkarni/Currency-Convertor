@@ -33,7 +33,7 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
         return currencyType;
     }
 
-    @Cacheable(value="conversions")
+    @Cacheable(value = "conversions", key = "#conversionDTO.fromCurrency + #conversionDTO.toCurrency + #conversionDTO.exchangeDate")
     public BigDecimal getCurrencyConversion(ConversionDTO conversionDTO) {
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(conversionDTO.getExchangeDate());

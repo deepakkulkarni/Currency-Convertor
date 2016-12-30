@@ -44,10 +44,10 @@
                 </tr>
                 <c:forEach var="conversion" items="${conversions}">
                     <tr class="row">
-                        <td class="column" height="30px">${conversion.fromCurrency}</td>
-                        <td class="column">${conversion.toCurrency}</td>
-                        <td class="column">${conversion.rate}</td>
-                        <td class="column"><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
+                        <td height="30px">${conversion.fromCurrency}</td>
+                        <td>${conversion.toCurrency}</td>
+                        <td>${conversion.rate}</td>
+                        <td><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
                     </tr>
                 </c:forEach>
              </table>

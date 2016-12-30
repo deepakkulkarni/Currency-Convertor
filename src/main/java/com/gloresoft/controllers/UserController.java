@@ -3,14 +3,16 @@ package com.gloresoft.controllers;
 import com.gloresoft.entity.User;
 import com.gloresoft.model.LoginDTO;
 import com.gloresoft.model.RegisterDTO;
-import com.gloresoft.service.CurrencyService;
 import com.gloresoft.service.LocationService;
 import com.gloresoft.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +26,12 @@ public class UserController {
     @Autowired
     public LocationService locationService;
 
+    @Value("${authenticationError}")
+    public String authenticationError;
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView login() {
+    private ModelAndView login() {
         return new ModelAndView("login");
     }
 
@@ -57,7 +63,7 @@ public class UserController {
             return new ModelAndView("redirect:/list");
         } else {
             ModelAndView mav = new ModelAndView("login");
-            mav.addObject("authenticationError", "Username/Password incorrect. Please register to create an account, if not already registered.");
+            mav.addObject("authenticationError", authenticationError);
             mav.setViewName("login");
             return mav;
         }

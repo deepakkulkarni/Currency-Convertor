@@ -52,6 +52,7 @@ input[type="text"], input[type="password"]{
     font-size: 15px;
     font-weight: bold;
     text-align: center;
+    background-color: #e6e6ff;
  }
 
 input[type=text]:focus {
@@ -71,6 +72,7 @@ input[type="submit"], input[type="button"]{
 	color: #205081;
 	 border-radius: 10px;
 	 color: #205081;
+	 background-color: #e6e6ff;
  }
 
 .register {
@@ -91,6 +93,8 @@ input[type="submit"], input[type="button"]{
     border-radius: 15px;
     font-size: 15px;
     font-weight: normal;
+    background-color: #e6e6ff;
+    color: #205081;
  }
 
  .register input[type="password"]{
@@ -102,6 +106,8 @@ input[type="submit"], input[type="button"]{
     border-radius: 15px;
     font-size: 15px;
     font-weight: normal;
+    background-color: #e6e6ff;
+    color: #205081;
 }
 
  .register select {
@@ -110,6 +116,7 @@ input[type="submit"], input[type="button"]{
       padding: 15px;
       margin: 10px;
       border-radius: 5px;
+      background-color: #e6e6ff;
  }
 
 .register input[type="submit"]{
@@ -124,6 +131,7 @@ input[type="submit"], input[type="button"]{
 	font-size:15px;
 	color: #205081;
 	border-radius: 15px;
+	background-color: #e6e6ff;
  }
 
  .register input[type="button"]{
@@ -138,6 +146,7 @@ input[type="submit"], input[type="button"]{
 	font-size:15px;
 	color: #205081;
 	border-radius: 15px;
+	background-color: #e6e6ff;
  }
 
 .user-info {
@@ -161,6 +170,7 @@ input[type="submit"], input[type="button"]{
 
 .row {
     color: #205081;
+    background-color: #e6e6ff;
 }
 
 .column {
@@ -190,6 +200,7 @@ input[type="submit"], input[type="button"]{
 	font-size:20px;
 	color: #205081;
 	border-radius:10px;
+	background-color: #e6e6ff;
  }
 
 .main-page input[type="text"]{
@@ -203,6 +214,7 @@ input[type="submit"], input[type="button"]{
     font-size: 15px;
     font-weight: bold;
     color: #205081;
+    background-color: #e6e6ff;
 }
 
 .main-page-text{
@@ -225,6 +237,7 @@ input[type="submit"], input[type="button"]{
     font-size: 15px;
     font-weight: bold;
     color: #205081;
+    background-color: #e6e6ff;
 }
 
 #login a{
@@ -252,7 +265,7 @@ table {
 
 th {
    background-color: #205081;
-   color:#fff;
+   color: #e6e6ff;
    text-transform: uppercase;
    font-size:15px;
 }
