@@ -61,7 +61,7 @@ $(document).ready(function() {
         });
 
         $("#back").click(function () {
-            window.location.href = '/currency-convertor/';
+            window.location.href = '/currency-converter/';
         });
 
         $('#username').focusout(function(){

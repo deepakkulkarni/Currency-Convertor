@@ -40,7 +40,12 @@ public class UserRepositoryImpl extends AbstractBaseRepository<User> implements 
     public String getPasswordSalt(final String userName) {
         Query query = entityManager.createQuery("SELECT u.passwordSalt FROM User u WHERE u.userName = :username");
         query.setParameter("username", userName);
-        String passwordSalt = (String) query.getSingleResult();
+        String passwordSalt = "";
+        try {
+            passwordSalt = (String) query.getSingleResult();
+        } catch (NoResultException e) {
+            return passwordSalt;
+        }
         return passwordSalt;
     }
 }
