@@ -13,8 +13,7 @@ public abstract class AbstractBaseRepository<T extends AbstractEntity> implement
 
     private final Logger log = LoggerFactory.getLogger(AbstractBaseRepository.class);
 
-    @Value("${persistence.unit.name}")
-    private static String PERSISTENCE_UNIT_NAME;
+    private static String PERSISTENCE_UNIT_NAME = "CURRENCY-CONVERTER";
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     protected final EntityManager entityManager = factory.createEntityManager();
     private final Class<T> clazz;
