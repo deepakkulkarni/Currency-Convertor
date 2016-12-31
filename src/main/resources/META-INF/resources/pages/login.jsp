@@ -1,10 +1,7 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/validation/login-validation.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
     <title>Login form</title>
+    <jsp:include page="common/header.jsp"/>
 </head>
 <body>
     <div id="login" class="login">
@@ -16,11 +13,5 @@
             <input type="button" value="Register" id="register">
         </form>
     </div>
-
-    <script>
-        $("#register").click(function () {
-            window.location.href = '/currency-convertor/register';
-        });
-    </script>
 </body>
 </html>

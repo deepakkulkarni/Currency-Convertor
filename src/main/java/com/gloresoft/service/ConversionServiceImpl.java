@@ -25,28 +25,27 @@ public class ConversionServiceImpl implements ConversionService {
     private UserRepository userRepository;
 
     @Override
-    public List<Conversion> getConversions(Long Id) {
+    public List<Conversion> getConversions(final Long Id) {
         return conversionRepository.findAllByUserId(Id);
     }
 
     @Override
-    public void convert(ConversionDTO conversionDTO, Long Id) {
-        User user =  userRepository.findById(Id);
-
+    public void convert(final ConversionDTO conversionDTO, final Long Id) {
+        User user = userRepository.findById(Id);
         BigDecimal rate = currencyRepository.getCurrencyConversion(conversionDTO);
 
-        Conversion conversion = createConversion(conversionDTO);
-        conversion.setRate(rate);
+        Conversion conversion = createConversion(conversionDTO, rate);
         conversion.setUser(user);
 
         conversionRepository.merge(conversion);
     }
 
-    private Conversion createConversion(ConversionDTO conversionDTO) {
+    private Conversion createConversion(final ConversionDTO conversionDTO, final BigDecimal rate) {
         Conversion conversion = new Conversion();
         conversion.setFromCurrency(conversionDTO.getFromCurrency());
         conversion.setToCurrency(conversionDTO.getToCurrency());
         conversion.setExchangeDate(conversionDTO.getExchangeDate());
+        conversion.setRate(rate);
         return conversion;
     }
 }

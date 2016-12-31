@@ -3,16 +3,11 @@
 <html>
 <head>
     <title>Main Page</title>
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/validation/main-validation.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
+    <jsp:include page="common/header.jsp"/>
 </head>
 <body>
   <div class="user-info">
-    <span>Welcome, ${name} <br> <a href="/currency-convertor/invalidate">Logout</a></span>
+    <span>Welcome, ${name} <br> <a href="invalidate">Logout</a></span>
   </div>
     <div id="convert" class="main-page">
         <div id="inner">
@@ -46,26 +41,15 @@
                     <tr class="row">
                         <td height="30px">${conversion.fromCurrency}</td>
                         <td>${conversion.toCurrency}</td>
-                        <td>${conversion.rate}</td>
+                        <td><c:choose>
+                                <c:when test="${empty conversion.rate}">Data not available</c:when>
+                                <c:otherwise>${conversion.rate}</c:otherwise>
+                         </c:choose></td>
                         <td><fmt:formatDate value="${conversion.exchangeDate}" pattern="dd-MMM-yyyy"/></td>
                     </tr>
                 </c:forEach>
              </table>
         </div>
     </c:if>
-
-    <script>
-        $(function() {
-            var currentDate = new Date();
-            $("#conversionDate").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "-10:+0",
-                maxDate: 0,
-                dateFormat: 'dd-M-yy'
-              });
-              $("#conversionDate").datepicker("setDate", currentDate);
-        });
-      </script>
 </body>
 </html>

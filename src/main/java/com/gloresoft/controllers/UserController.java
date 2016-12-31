@@ -21,13 +21,13 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @Autowired
-    public LocationService locationService;
+    private LocationService locationService;
 
     @Value("${authenticationError}")
-    public String authenticationError;
+    private String authenticationError;
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -43,20 +43,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute RegisterDTO registerDTO) {
+    public ModelAndView register(@ModelAttribute final RegisterDTO registerDTO) {
         userService.register(registerDTO);
         return new ModelAndView("login");
     }
 
     @RequestMapping(value = "/check-username", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> isUserNameExists(HttpServletRequest request) {
+    public ResponseEntity<Boolean> isUserNameExists(final HttpServletRequest request) {
         String username = request.getParameter("username");
         Boolean result = userService.isUserNameExists(username);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ModelAndView authenticate(HttpServletRequest request, @ModelAttribute LoginDTO loginDTO) {
+    public ModelAndView authenticate(final HttpServletRequest request, @ModelAttribute final LoginDTO loginDTO) {
         if (userService.authenticate(loginDTO)) {
             User user = userService.findByName(loginDTO.getUsername());
             request.getSession().setAttribute("user", user);
@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/invalidate", method = RequestMethod.GET)
-    public ModelAndView logout(HttpServletRequest request) {
+    public ModelAndView logout(final HttpServletRequest request) {
         request.getSession().invalidate();
         return new ModelAndView("redirect:/");
     }

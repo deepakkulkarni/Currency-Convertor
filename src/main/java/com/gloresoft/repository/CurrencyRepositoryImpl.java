@@ -1,6 +1,5 @@
 package com.gloresoft.repository;
 
-
 import com.gloresoft.model.ConversionDTO;
 import com.gloresoft.model.CurrencyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,10 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
     private RestTemplate restTemplate;
 
     public List<String> getCurrencyTypes() {
-        String currency_API_URL = currency_API_BASE_URL + "latest";
+        final List<String> currencyType = new ArrayList<>();
+        final String currency_API_URL = currency_API_BASE_URL + "latest";
 
-        List<String> currencyType = new ArrayList<>();
-
-        CurrencyDTO currencyDTO = restTemplate.getForObject(currency_API_URL, CurrencyDTO.class);
+        final CurrencyDTO currencyDTO = restTemplate.getForObject(currency_API_URL, CurrencyDTO.class);
 
         currencyType.add(currencyDTO.getBaseCurrency());
         currencyDTO.getRates().keySet().forEach(e -> currencyType.add(e));
@@ -34,11 +32,12 @@ public class CurrencyRepositoryImpl implements CurrencyRepository {
     }
 
     @Cacheable(value = "conversions", key = "#conversionDTO.fromCurrency + #conversionDTO.toCurrency + #conversionDTO.exchangeDate")
-    public BigDecimal getCurrencyConversion(ConversionDTO conversionDTO) {
+    public BigDecimal getCurrencyConversion(final ConversionDTO conversionDTO) {
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(conversionDTO.getExchangeDate());
         String fromCurrency = conversionDTO.getFromCurrency();
         String toCurrency = conversionDTO.getToCurrency();
+
         if (fromCurrency.equalsIgnoreCase(toCurrency))
             return new BigDecimal(1);
 

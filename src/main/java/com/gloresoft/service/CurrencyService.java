@@ -9,7 +9,6 @@ public interface CurrencyService {
 
     List<String> getTypes();
 
-    BigDecimal getConversionRate(ConversionDTO conversionDTO);
-
+    BigDecimal getConversionRate(final ConversionDTO conversionDTO);
 }
 

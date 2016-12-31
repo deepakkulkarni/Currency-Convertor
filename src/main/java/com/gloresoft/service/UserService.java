@@ -6,11 +6,11 @@ import com.gloresoft.model.RegisterDTO;
 
 public interface UserService {
 
-    boolean authenticate(LoginDTO loginDTO);
+    boolean authenticate(final LoginDTO loginDTO);
 
-    void register(RegisterDTO registerDTO);
+    void register(final RegisterDTO registerDTO);
 
-    User findByName(String username);
+    User findByName(final String username);
 
-    boolean isUserNameExists(String userName);
+    boolean isUserNameExists(final String userName);
 }

@@ -1,6 +1,7 @@
 package com.gloresoft.caching;
 
 import com.google.common.cache.CacheBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,31 +19,22 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
-public class CacheConfig implements CachingConfigurer {
+public class CacheConfig {
+
+    @Value("${cache.expiry.time}")
+    private int expiryTime;
+
+    @Value("${cache.max.records}")
+    private int maximumSize;
 
     @Bean
     public CacheManager cacheManager() {
         SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
         GuavaCache conversions = new GuavaCache("conversions", CacheBuilder.newBuilder()
-                .expireAfterAccess(30, TimeUnit.MINUTES)
-                .maximumSize(500)
+                .expireAfterAccess(expiryTime, TimeUnit.MINUTES)
+                .maximumSize(maximumSize)
                 .build());
         simpleCacheManager.setCaches(Arrays.asList(conversions));
         return simpleCacheManager;
-    }
-
-    @Override
-    public CacheResolver cacheResolver() {
-        return null;
-    }
-
-    @Override
-    public KeyGenerator keyGenerator() {
-        return new SimpleKeyGenerator();
-    }
-
-    @Override
-    public CacheErrorHandler errorHandler() {
-        return null;
     }
 }

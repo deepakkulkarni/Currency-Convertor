@@ -1,8 +1,5 @@
 package com.gloresoft;
 
-import com.google.common.cache.CacheBuilder;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -11,8 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableWebMvc

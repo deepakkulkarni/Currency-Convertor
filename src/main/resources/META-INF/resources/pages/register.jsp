@@ -2,12 +2,7 @@
 <html>
 <head>
     <title>User Registration</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/validation/registration-validation.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
+    <jsp:include page="common/header.jsp"/>
 </head>
 <body>
     <div class="register">
@@ -32,42 +27,5 @@
             <input type="button" value="Back" id="back">
         </form>
     </div>
-    <script>
-    $(function() {
-        $("#birthdate").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            maxDate: 0,
-            dateFormat: 'dd-M-yy'
-          });
-    });
-
-    $("#back").click(function () {
-        window.location.href = '/currency-convertor/';
-    });
-
-    $('#username').focusout(function(){
-        var username = $('#username').val();
-        $.post("check-username",{username: username}).done(function(result) {
-            if(result == true){
-                alert("Username already taken. Please try with some other username.");
-                $('#username').val("");
-                $('#username').focus();
-             }
-        });
-    });
-
-    $('#registrationForm').submit(function(){
-            var selectedCountry = $('#country').val();
-            var obj = $("#allCountries").find("option[value='"+selectedCountry+"']")
-             if(obj !=null && obj.length<=0){
-                 alert("Please enter a valid country.");
-                 $('#country').val("");
-                 $('#country').focus();
-             }
-    });
-
-    </script>
 </body>
 </html>

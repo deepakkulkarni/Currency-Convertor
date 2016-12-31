@@ -19,29 +19,8 @@ public class User extends AbstractEntity {
     @Column(name = "PASSWORD_SALT")
     private String passwordSalt;
 
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-
-    public void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
-
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
     private Set<Conversion> conversions;
-
-    public void addConversion(Conversion conversion) {
-        conversion.setUser(this);
-        conversions.add(conversion);
-    }
-
-    public Set<Conversion> getConversions() {
-        return conversions;
-    }
-
-    public void setConversions(Set<Conversion> conversions) {
-        this.conversions = conversions;
-    }
 
     public void addRegistration(Registration registration) {
         this.setRegistration(registration);
@@ -52,12 +31,12 @@ public class User extends AbstractEntity {
         return registration;
     }
 
-    public void setRegistration(Registration registration) {
-        this.registration = registration;
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setRegistration(Registration registration) {
+        this.registration = registration;
     }
 
     public void setUserName(String userName) {

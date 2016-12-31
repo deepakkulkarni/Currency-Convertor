@@ -15,4 +15,8 @@ $(document).ready(function() {
             minlength: "Password must have at least 6 characters"
         }
     }});
+
+    $("#register").click(function () {
+         window.location.href = 'register';
+    });
 });

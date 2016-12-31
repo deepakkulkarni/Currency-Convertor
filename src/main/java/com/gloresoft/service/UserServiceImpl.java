@@ -23,26 +23,25 @@ public class UserServiceImpl implements UserService {
     private RegistrationRepository registrationRepository;
 
     @Override
-    public boolean authenticate(LoginDTO loginDTO) {
+    public boolean authenticate(final LoginDTO loginDTO) {
         String passwordSalt = userRepository.getPasswordSalt(loginDTO.getUsername());
         String securedPassword = DigestUtils.sha512Hex((loginDTO.getPassword() + passwordSalt).getBytes());
         return userRepository.authenticate(loginDTO.getUsername(), securedPassword);
     }
 
     @Override
-    public User findByName(String username) {
+    public User findByName(final String username) {
         return userRepository.findByName(username);
     }
 
     @Override
-    public boolean isUserNameExists(String userName) {
+    public boolean isUserNameExists(final String userName) {
         return userRepository.isUserNameExists(userName);
     }
 
     @Override
-    public void register(RegisterDTO registerDTO) {
+    public void register(final RegisterDTO registerDTO) {
         Registration registration = createRegistration(registerDTO);
-
         User user = createUser(registerDTO);
         user.addRegistration(registration);
 

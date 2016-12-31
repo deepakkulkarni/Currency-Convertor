@@ -18,7 +18,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         return currencyRepository.getCurrencyTypes();
     }
 
-    public BigDecimal getConversionRate(ConversionDTO conversionDTO) {
+    public BigDecimal getConversionRate(final ConversionDTO conversionDTO) {
         return currencyRepository.getCurrencyConversion(conversionDTO);
     }
 

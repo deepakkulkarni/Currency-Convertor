@@ -1,7 +1,6 @@
 package com.gloresoft.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -49,48 +48,24 @@ public class Registration extends AbstractEntity {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getDob() {
-        return dob;
     }
 
     public void setDob(Date dob) {
         this.dob = dob;
     }
 
-    public String getStreetName() {
-        return streetName;
-    }
-
     public void setStreetName(String streetName) {
         this.streetName = streetName;
-    }
-
-    public String getPinCode() {
-        return pinCode;
     }
 
     public void setPinCode(String pinCode) {
         this.pinCode = pinCode;
     }
 
-    public String getCity() {
-        return city;
-    }
-
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public void setCountry(String country) {

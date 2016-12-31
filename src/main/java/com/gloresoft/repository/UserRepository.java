@@ -4,11 +4,11 @@ import com.gloresoft.entity.User;
 
 public interface UserRepository extends BaseRepository<User>{
 
-    boolean authenticate(String userName, String password);
+    boolean authenticate(final String userName, final String password);
 
-    boolean isUserNameExists(String userName);
+    boolean isUserNameExists(final String userName);
 
-    User findByName(String userName);
+    User findByName(final String userName);
 
-    String getPasswordSalt(String userName);
+    String getPasswordSalt(final String userName);
 }

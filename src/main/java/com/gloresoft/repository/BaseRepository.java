@@ -12,5 +12,4 @@ public interface BaseRepository<T extends AbstractEntity> {
     T create(T item);
 
     T merge(T item);
-
 }

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $("#registrationForm").validate({
     rules: {
         name: "required",
@@ -48,4 +49,39 @@ $(document).ready(function() {
         city: "City field cannot be blank!",
         country: "Please select your country"
     }});
+
+    $(function() {
+            $("#birthdate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                maxDate: 0,
+                dateFormat: 'dd-M-yy'
+              });
+        });
+
+        $("#back").click(function () {
+            window.location.href = '/currency-convertor/';
+        });
+
+        $('#username').focusout(function(){
+            var username = $('#username').val();
+            $.post("check-username",{username: username}).done(function(result) {
+                if(result == true){
+                    alert("Username already taken. Please try with some other username.");
+                    $('#username').val("");
+                    $('#username').focus();
+                 }
+            });
+        });
+
+        $('#registrationForm').submit(function(){
+                var selectedCountry = $('#country').val();
+                var obj = $("#allCountries").find("option[value='"+selectedCountry+"']")
+                 if(obj !=null && obj.length<=0){
+                     alert("Please enter a valid country.");
+                     $('#country').val("");
+                     $('#country').focus();
+                 }
+        });
 });

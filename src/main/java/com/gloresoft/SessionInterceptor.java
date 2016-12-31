@@ -1,6 +1,7 @@
 package com.gloresoft;
 
 import com.gloresoft.entity.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.Cookie;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class SessionInterceptor extends HandlerInterceptorAdapter {
 
-    private static final List exclusionList = new ArrayList<String>();
+    private static List <String>exclusionList = new ArrayList();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

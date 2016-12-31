@@ -18,21 +18,20 @@ import javax.servlet.http.HttpServletRequest;
 public class ConversionController {
 
     @Autowired
-    public ConversionService conversionService;
+    private ConversionService conversionService;
 
     @Autowired
-    public CurrencyService currencyService;
-
+    private CurrencyService currencyService;
 
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
-    public ModelAndView convert(HttpServletRequest request, @ModelAttribute ConversionDTO conversionDTO) {
+    public ModelAndView convert(final HttpServletRequest request, @ModelAttribute final ConversionDTO conversionDTO) {
         User user = (User) request.getSession().getAttribute("user");
         conversionService.convert(conversionDTO, user.getId());
         return new ModelAndView("redirect:/list");
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(HttpServletRequest request) {
+    public ModelAndView list(final HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav = new ModelAndView();
         mav.addObject("currencyTypes", currencyService.getTypes());
@@ -41,5 +40,4 @@ public class ConversionController {
         mav.setViewName("main");
         return mav;
     }
-
 }
