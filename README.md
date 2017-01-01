@@ -30,15 +30,10 @@ This will start the application at
 
 http://localhost:8080/currency-converter/
     
-#### Deployment on cloud
-
-The application is also deployed on heroku at the below mentioned location.
-    
-https://currencyconvertor.herokuapp.com/currency-converter/    
-
 #### Technology stack used
 
 1. Spring Boot
 2. Spring MVC
 3. HSQL in memory database
 4. JPA
+5. Guava Cache

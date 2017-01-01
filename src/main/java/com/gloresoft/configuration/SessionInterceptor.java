@@ -1,4 +1,4 @@
-package com.gloresoft;
+package com.gloresoft.configuration;
 
 import com.gloresoft.entity.User;
 import org.springframework.beans.factory.annotation.Value;

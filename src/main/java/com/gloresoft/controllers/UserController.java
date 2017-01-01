@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -26,9 +27,11 @@ public class UserController {
     @Autowired
     private LocationService locationService;
 
-    @Value("${authenticationError}")
-    private String authenticationError;
+    @Value("${error.authentication}")
+    private String authenticationError = "";
 
+    @Value("${session.expiry.time}")
+    private int sessionExpiryTime;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     private ModelAndView login() {
@@ -49,17 +52,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/check-username", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> isUserNameExists(final HttpServletRequest request) {
+    public ResponseEntity<Boolean> isUserNameExists(HttpServletRequest request) {
         String username = request.getParameter("username");
         Boolean result = userService.isUserNameExists(username);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ModelAndView authenticate(final HttpServletRequest request, @ModelAttribute final LoginDTO loginDTO) {
+    public ModelAndView authenticate(HttpServletRequest request, @ModelAttribute final LoginDTO loginDTO) {
         if (userService.authenticate(loginDTO)) {
             User user = userService.findByName(loginDTO.getUsername());
-            request.getSession().setAttribute("user", user);
+            setSession(request, user);
             return new ModelAndView("redirect:/list");
         } else {
             ModelAndView mav = new ModelAndView("login");
@@ -69,8 +72,14 @@ public class UserController {
         }
     }
 
+    private void setSession(HttpServletRequest request, User user) {
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        session.setMaxInactiveInterval(sessionExpiryTime);
+    }
+
     @RequestMapping(value = "/invalidate", method = RequestMethod.GET)
-    public ModelAndView logout(final HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return new ModelAndView("redirect:/");
     }

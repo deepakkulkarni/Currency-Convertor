@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+    $('#registrationForm').submit(function(){
+        var selectedCountry = $('#country').val();
+        var obj = $("#allCountries").find("option[value='"+selectedCountry+"']")
+         if(obj != null && obj.length <= 0){
+             alert("Please enter a valid country.");
+             $('#country').val("");
+             $('#country').focus();
+             return false;
+         }
+         return true;
+    });
+
     $("#registrationForm").validate({
     rules: {
         name: "required",
@@ -22,7 +34,10 @@ $(document).ready(function() {
         dob : "required",
         address: "required",
         pin: "required",
-        city: "required",
+        city: {
+            required: true,
+            lettersonly: true
+        },
         country: "required"
     },
     messages: {
@@ -46,7 +61,10 @@ $(document).ready(function() {
         address: "Address field cannot be blank!",
         dob: "Date of Birth field cannot be blank!",
         pin: "Pin field cannot be blank!",
-        city: "City field cannot be blank!",
+        city: {
+            required: "City field cannot be blank!",
+            lettersonly: "Please enter only letters for city"
+        },
         country: "Please select your country"
     }});
 
@@ -75,13 +93,4 @@ $(document).ready(function() {
             });
         });
 
-        $('#registrationForm').submit(function(){
-                var selectedCountry = $('#country').val();
-                var obj = $("#allCountries").find("option[value='"+selectedCountry+"']")
-                 if(obj !=null && obj.length<=0){
-                     alert("Please enter a valid country.");
-                     $('#country').val("");
-                     $('#country').focus();
-                 }
-        });
 });

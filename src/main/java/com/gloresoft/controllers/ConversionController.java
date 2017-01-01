@@ -24,14 +24,14 @@ public class ConversionController {
     private CurrencyService currencyService;
 
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
-    public ModelAndView convert(final HttpServletRequest request, @ModelAttribute final ConversionDTO conversionDTO) {
+    public ModelAndView convert(HttpServletRequest request, @ModelAttribute final ConversionDTO conversionDTO) {
         User user = (User) request.getSession().getAttribute("user");
         conversionService.convert(conversionDTO, user.getId());
         return new ModelAndView("redirect:/list");
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView list(final HttpServletRequest request) {
+    public ModelAndView list(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav = new ModelAndView();
         mav.addObject("currencyTypes", currencyService.getTypes());

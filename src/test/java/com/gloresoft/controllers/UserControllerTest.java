@@ -115,13 +115,6 @@ public class UserControllerTest {
 
     }
 
-    /*private LoginDTO createLoginDTO() {
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setUsername("john");
-        loginDTO.setPassword("123456");
-        return loginDTO;
-    }*/
-
     @Test
     public void testRegisterPOST() throws Exception {
         RegisterDTO registerDTO = createRegisterDTO();
