@@ -13,11 +13,16 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-        DatabaseManagerSwing.main(new String[]{"--url", "jdbc:hsqldb:mem:currency-convertor", "--user", "sa", "--password", ""});
+
+        //launchDatabaseUI();
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Application.class);
+    }
+
+    private static void launchDatabaseUI(){
+       DatabaseManagerSwing.main(new String[]{"--url", "jdbc:hsqldb:mem:currency-convertor", "--user", "sa", "--password", ""});
     }
 }
